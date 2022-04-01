@@ -16,7 +16,13 @@ class Admin
      */
     public function handle($request, Closure $next)
     {
-        // @TODO implement
+        if (! (Auth::user())) {
+            abort(401);
+        }
+
+        if (! (Auth::user()->is_admin == 1)) {
+            abort(403);
+        }
 
         return $next($request);
     }

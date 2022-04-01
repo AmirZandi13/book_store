@@ -6,9 +6,10 @@ declare (strict_types=1);
 namespace App\Http\Resources;
 
 
+use App\Http\Resources\Interfaces\UserResourceInterface;
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class UserResource extends JsonResource
+class UserResource extends JsonResource implements UserResourceInterface
 {
     /**
      * Transform the resource into an array.
@@ -19,7 +20,24 @@ class UserResource extends JsonResource
     public function toArray($request)
     {
         return [
-            //@todo code here
+            'id' => $this->getId(),
+            'name' => $this->getName(),
         ];
+    }
+
+    /**
+     * @return int
+     */
+    public function getId(): int
+    {
+        return $this->resource->id;
+    }
+
+    /**
+     * @return string
+     */
+    public function getName(): string
+    {
+        return $this->resource->name;
     }
 }
